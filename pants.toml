@@ -29,3 +29,6 @@ export = false
 
 [pytest]
 export = false
+
+[twine]
+args = ["--skip-existing"]
