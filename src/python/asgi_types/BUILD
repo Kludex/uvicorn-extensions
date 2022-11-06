@@ -5,6 +5,6 @@ python_distribution(
     dependencies=[":package_data"],
     provides=python_artifact(name="asgi-types"),
     wheel_config_settings={"--global-option": ["--python-tag", "py37.py38.py39.py310.py311"]},
-    generate_setup = False,
+    generate_setup=False,
     repositories=["@pypi"],
 )

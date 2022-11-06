@@ -3,8 +3,9 @@ requires = ["hatchling>=1.11.0"]
 build-backend = "hatchling.build"
 
 [project]
-name = "uvicorn-trailers"
+name = "uvicorn-denial"
 version = "0.0.0"
-description = "ASGI Trailers extension for Uvicorn 🚂"
+description = "Websocket Denial Response extension for Uvicorn 🔒"
 license = { text = "MIT" }
 authors = [{ name = "Marcelo Trylesinski", email = "marcelotryle@gmail.com" }]
+readme = "README.md"
