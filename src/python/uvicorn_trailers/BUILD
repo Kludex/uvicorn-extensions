@@ -1,10 +1,17 @@
-resources(name="package_data", sources=["pyproject.toml", "README.md"])
+python_sources()
+
+resources(name="package_data", sources=["README.md", "py.typed"])
 
 python_distribution(
     name="dist",
-    dependencies=[":package_data"],
-    provides=python_artifact(name="uvicorn-trailers"),
-    wheel_config_settings={"--global-option": ["--python-tag", "py37.py38.py39.py310.py311"]},
-    generate_setup=False,
+    dependencies=[
+        ":uvicorn_trailers",
+        ":package_data",
+    ],
+    provides=python_artifact(
+        name="uvicorn-trailers",
+        version="0.0.0",
+        description="ASGI Trailers extension for Uvicorn 🚂",
+    ),
     repositories=["@pypi"],
 )
