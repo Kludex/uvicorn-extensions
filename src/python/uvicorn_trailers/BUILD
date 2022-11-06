@@ -1,6 +1,6 @@
 python_sources()
 
-resources(name="package_data", sources=["README.md", "py.typed"])
+resources(name="package_data", sources=["py.typed"])
 
 python_distribution(
     name="dist",
@@ -8,6 +8,7 @@ python_distribution(
         ":uvicorn_trailers",
         ":package_data",
     ],
+    long_description_path="src/python/uvicorn_trailers/README.md",
     provides=python_artifact(
         name="uvicorn-trailers",
         version="0.0.0",

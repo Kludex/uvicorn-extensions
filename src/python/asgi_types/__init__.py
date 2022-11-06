@@ -211,6 +211,7 @@ ASGIReceiveEvent = Union[
 ASGISendEvent = Union[
     HTTPResponseStartEvent,
     HTTPResponseBodyEvent,
+    HTTPResponseTrailersEvent,
     HTTPServerPushEvent,
     HTTPDisconnectEvent,
     WebSocketAcceptEvent,
