@@ -1,0 +1,10 @@
+[build-system]
+requires = ["hatchling>=1.11.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "uvicorn-tls"
+version = "0.0.0"
+description = "ASGI TLS extension for Uvicorn 🔒"
+license = { text = "MIT" }
+authors = [{ name = "Marcelo Trylesinski", email = "marcelotryle@gmail.com" }]

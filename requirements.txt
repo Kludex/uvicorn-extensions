@@ -1,0 +1,5 @@
+uvicorn
+black
+isort
+pytest
+mkdocs-material

@@ -1,0 +1,31 @@
+[GLOBAL]
+pants_version = "2.14.0"
+backend_packages = [
+    "pants.backend.shell",
+    "pants.backend.python",
+    "pants.backend.python.lint.black",
+    "pants.backend.experimental.python",
+]
+
+[anonymous-telemetry]
+enabled = true
+repo_id = "41f24f83-613f-46cc-9808-6d4c01fbd25b"
+
+[source]
+root_patterns = ['/src/*', '/tests/*']
+
+[python]
+interpreter_constraints = ["CPython==3.10.*"]
+tailor_ignore_empty_init_files = false
+
+[python-infer]
+init_files = "always"
+
+[subprocess-environment]
+env_vars.add = ["TWINE_PASSWORD", "TWINE_USERNAME"]
+
+[black]
+export = false
+
+[pytest]
+export = false
