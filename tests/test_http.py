@@ -8,7 +8,7 @@ from uvicorn import Server
 from uvicorn.config import WS_PROTOCOLS, Config
 from uvicorn.main import ServerState
 from uvicorn.protocols.http.h11_impl import H11Protocol
-from uvicorn_tests.response import Response
+from tests.response import Response
 
 try:
     from uvicorn.protocols.http.httptools_impl import HttpToolsProtocol
