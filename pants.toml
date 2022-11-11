@@ -12,7 +12,7 @@ enabled = true
 repo_id = "41f24f83-613f-46cc-9808-6d4c01fbd25b"
 
 [source]
-root_patterns = ['/src/*', '/tests/*']
+root_patterns = ['/src/python/*', '/tests/python/*']
 
 [python]
 interpreter_constraints = [">=3.7"]
