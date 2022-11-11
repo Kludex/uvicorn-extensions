@@ -1,0 +1,11 @@
+[build-system]
+requires = ["hatchling>=1.11.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "uvicorn-zero-copy"
+version = "0.0.0"
+description = "Uvicorn with Zero-Copy Send extension!"
+license = { text = "MIT" }
+authors = [{ name = "Marcelo Trylesinski", email = "marcelotryle@gmail.com" }]
+readme = "README.md"

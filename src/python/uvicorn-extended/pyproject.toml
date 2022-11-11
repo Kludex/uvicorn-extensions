@@ -1,0 +1,11 @@
+[build-system]
+requires = ["hatchling>=1.11.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "uvicorn-extended"
+version = "0.0.0"
+description = "Uvicorn with batteries! :battery:"
+license = { text = "MIT" }
+authors = [{ name = "Marcelo Trylesinski", email = "marcelotryle@gmail.com" }]
+readme = "README.md"

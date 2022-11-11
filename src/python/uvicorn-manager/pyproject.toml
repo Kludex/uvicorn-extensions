@@ -1,0 +1,11 @@
+[build-system]
+requires = ["hatchling>=1.11.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "uvicorn-manager"
+version = "0.0.0"
+description = "Process manager for Uvicorn processes! :worker:"
+license = { text = "MIT" }
+authors = [{ name = "Marcelo Trylesinski", email = "marcelotryle@gmail.com" }]
+readme = "README.md"

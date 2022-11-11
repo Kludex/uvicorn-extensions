@@ -1,0 +1,11 @@
+[build-system]
+requires = ["hatchling>=1.11.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "uvicorn-http2"
+version = "0.0.0"
+description = "Uvicorn with HTTP/2 support! :rocket:"
+license = { text = "MIT" }
+authors = [{ name = "Marcelo Trylesinski", email = "marcelotryle@gmail.com" }]
+readme = "README.md"
