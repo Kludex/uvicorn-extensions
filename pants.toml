@@ -30,5 +30,8 @@ export = false
 [pytest]
 export = false
 
+[test]
+use_coverage = true
+
 [twine]
 args = ["--skip-existing"]
