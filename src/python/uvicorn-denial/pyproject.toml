@@ -9,3 +9,4 @@ description = "Websocket Denial Response extension for Uvicorn 🔒"
 license = { text = "MIT" }
 authors = [{ name = "Marcelo Trylesinski", email = "marcelotryle@gmail.com" }]
 readme = "README.md"
+requires-python = ">=3.7"

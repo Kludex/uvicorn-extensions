@@ -10,3 +10,4 @@ license = { text = "MIT" }
 authors = [{ name = "Marcelo Trylesinski", email = "marcelotryle@gmail.com" }]
 readme = "README.md"
 dependencies = ["asgi-types==0.1.0"]
+requires-python = ">=3.7"

@@ -9,3 +9,4 @@ description = "Process manager for Uvicorn processes! :worker:"
 license = { text = "MIT" }
 authors = [{ name = "Marcelo Trylesinski", email = "marcelotryle@gmail.com" }]
 readme = "README.md"
+requires-python = ">=3.7"
