@@ -29,9 +29,14 @@ export = false
 
 [pytest]
 export = false
+extra_requirements.add = ["anyio"]
+lockfile = "<none>"
 
 [test]
 use_coverage = true
+
+[coverage-py]
+config = "pyproject.toml"
 
 [twine]
 args = ["--skip-existing"]
