@@ -4,5 +4,6 @@ This document contains guidelines for contributing to the project. Please read i
 
 ## Development
 
-This project uses [pantsbuild] as a build system, for that reason, you might need to check
-[check their documentation](https://www.pantsbuild.org/docs/setting-up-an-ide) to have a pleasant development experience.
+This project uses [pantsbuild] as a build system.
+
+Feel free to check their docs about how to [set up your IDE](https://www.pantsbuild.org/docs/setting-up-an-ide).
