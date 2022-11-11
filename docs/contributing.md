@@ -1,4 +1,4 @@
-# Contribution Guidelines
+# Contribution
 
 This document contains guidelines for contributing to the project. Please read it before contributing.
 
