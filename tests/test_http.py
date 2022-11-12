@@ -40,7 +40,6 @@ async def test_get_request(http_protocol):
     assert b"Hello, world" in protocol.transport.buffer
 
 
-@pytest.mark.skip(reason="Issue with capture logs fixture.")
 @pytest.mark.anyio
 @pytest.mark.parametrize("path", ["/", "/?foo", "/?foo=bar", "/?foo=bar&baz=1"])
 async def test_request_logging(path, http_protocol, caplog):  # pragma: no cover
@@ -534,7 +533,6 @@ async def test_unsupported_ws_upgrade_request(http_protocol):
     assert b"Hello, world" in protocol.transport.buffer
 
 
-@pytest.mark.skip(reason="Issue with capture logs fixture.")
 @pytest.mark.anyio
 async def test_unsupported_ws_upgrade_request_warn_on_auto(
     caplog: pytest.LogCaptureFixture, http_protocol

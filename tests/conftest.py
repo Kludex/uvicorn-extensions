@@ -3,6 +3,10 @@ import asyncio
 import pytest
 import uvicorn_extended
 import uvicorn_trailers
+from uvicorn.config import LOGGING_CONFIG
+
+# See: https://github.com/encode/uvicorn/blob/6496e6c1e3647c852bf993f7d62f2c65f9a8c2f5/tests/conftest.py#LL18-L26C61
+LOGGING_CONFIG["loggers"]["uvicorn"]["propagate"] = True
 
 
 @pytest.fixture(
