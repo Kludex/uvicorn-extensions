@@ -1,4 +1,8 @@
 [tool.coverage.report]
-fail_under = 100
 show_missing = true
 skip_covered = true
+exclude_lines = [
+    "pragma: no cover",
+    "pragma: to be covered",
+    "if TYPE_CHECKING:",
+]
