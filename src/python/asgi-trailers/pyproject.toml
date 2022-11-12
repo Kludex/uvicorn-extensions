@@ -1,0 +1,13 @@
+[build-system]
+requires = ["hatchling>=1.11.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "asgi-trailers"
+version = "0.1.0"
+description = "Streaming response with trailers support for ASGI! 🚀"
+license = { text = "MIT" }
+authors = [{ name = "Marcelo Trylesinski", email = "marcelotryle@gmail.com" }]
+readme = "README.md"
+dependencies = ["starlette>=0.20.0"]
+requires-python = ">=3.7"
