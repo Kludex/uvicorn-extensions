@@ -6,6 +6,7 @@ backend_packages = [
     "pants.backend.python.lint.black",
     "pants.backend.experimental.python",
 ]
+build_file_prelude_globs = ["pants-plugins/macros.py"]
 
 [anonymous-telemetry]
 enabled = true
