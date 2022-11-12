@@ -3,10 +3,10 @@ from typing import Awaitable, Callable, Dict, Iterable, Optional, Tuple, Type, U
 
 from typing_extensions import NotRequired
 
-if sys.version_info >= (3, 8):
-    from typing import Literal, Protocol, TypedDict
-else:
-    from typing_extensions import Literal, Protocol, TypedDict
+if sys.version_info >= (3, 8):  # pragma: no cover
+    from typing import Literal, TypedDict
+else:  # pragma: no cover
+    from typing_extensions import Literal, TypedDict
 
 
 __all__ = (
