@@ -18,6 +18,7 @@ jobs:
           gha-cache-key: cache-py${{ matrix.python-version }}
           named-caches-hash: ${{ hashFiles('pants.lock') }}
           cache-lmdb-store: "true"
+          pants-ci-config: "pants.toml"
 
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
