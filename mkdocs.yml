@@ -2,3 +2,30 @@ site_name: Uvicorn Extensions
 
 theme:
   name: material
+  palette:
+    primary: deep purple
+  features:
+    - navigation.tabs
+
+markdown_extensions:
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+
+nav:
+  - Home:
+      - Welcome: index.md
+      - Contributing: contributing.md
+  - Packages:
+      - Uvicorn Trailers: packages/uvicorn-trailers.md
+      - ASGI Trailers: packages/asgi-trailers.md

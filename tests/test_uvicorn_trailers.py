@@ -26,28 +26,23 @@ def http_protocol(request) -> asyncio.Protocol:
 
 @pytest.mark.anyio
 @pytest.mark.parametrize(
-    "http_response_start",
+    "headers",
     [
-        {"type": "http.response.start", "status": 200, "headers": [], "trailers": True},
-        {
-            "type": "http.response.start",
-            "status": 200,
-            "headers": [(b"te", b"trailers")],
-            "trailers": True,
-        },
-        {
-            "type": "http.response.start",
-            "status": 200,
-            "headers": [(b"transfer-encoding", b"chunked"), (b"te", b"trailers")],
-            "trailers": True,
-        },
+        [],
+        [(b"trailers", b"x-trailer-test")],
+        [(b"transfer-encoding", b"chunked"), (b"trailers", b"x-trailer-test")],
     ],
 )
-async def test_request_with_trailers(
-    http_response_start, http_protocol: asyncio.Protocol
-) -> None:
+async def test_request_with_trailers(headers, http_protocol: asyncio.Protocol) -> None:
     async def app(scope, receive, send) -> None:
-        await send(http_response_start)
+        await send(
+            {
+                "type": "http.response.start",
+                "status": 200,
+                "headers": headers,
+                "trailers": True,
+            }
+        )
         await send(
             {"type": "http.response.body", "body": b"Hello, world!", "more_body": False}
         )
