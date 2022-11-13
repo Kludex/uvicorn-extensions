@@ -18,6 +18,10 @@ root_patterns = ['/src/python/*', '/']
 [python]
 interpreter_constraints = [">=3.7"]
 tailor_ignore_empty_init_files = false
+enable_resolves = true
+
+[python.resolves]
+python-default = "pants.lock"
 
 [python-infer]
 init_files = "always"
