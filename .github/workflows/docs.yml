@@ -1,9 +1,7 @@
 name: Deploy Documentation
 
 on:
-  push:
-    branches: [main]
-    paths: [docs/**]
+  push: { branches: [main], paths: ["docs/**"] }
 
 jobs:
   deploy:
