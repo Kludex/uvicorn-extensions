@@ -1,5 +1,5 @@
 import sys
-from typing import Awaitable, Callable, Dict, Iterable, Optional, Tuple, Type, Union
+from typing import Awaitable, Callable, Dict, Iterable, Optional, Tuple, Union
 
 from typing_extensions import NotRequired
 

@@ -9,6 +9,7 @@ def hatch_distribution(name, package, **kwargs):
         repositories=["@pypi"],
     )
 
+
 def typed_python_sources(**kwargs):
     resource(name="stubs", source="py.typed")
 

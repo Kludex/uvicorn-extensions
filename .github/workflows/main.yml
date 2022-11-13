@@ -1,0 +1,43 @@
+name: Main
+
+on:
+  push: { branches: [main] }
+  pull_request: { branches: [main] }
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pantsbuild/actions/init-pants@v1
+        with:
+          pants-python-version: ${{ matrix.python-version }}
+          gha-cache-key: cache-py${{ matrix.python-version }}
+          named-caches-hash: ${{ hashFiles('pants.lock') }}
+          cache-lmdb-store: "true"
+
+      - name: Check BUILD files
+        run: ./pants tailor --check update-build-files --check
+
+      - name: Lint & Type check
+        run: |
+          ./pants lint check ::
+
+      - name: Test
+        run: |
+          ./pants test ::
+
+      - name: Build Wheels
+        run: |
+          ./pants package ::
+
+      - name: Upload pants log
+        uses: actions/upload-artifact@v3
+        with:
+          name: pants-log
+          path: .pants.d/pants.log
+        if: always() # We want the log even on failures.

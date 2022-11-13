@@ -1,0 +1,4 @@
+[flake8]
+ignore = W503, E203, B305
+max-line-length = 88
+exclude = pants-plugins/**
