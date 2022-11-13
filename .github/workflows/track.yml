@@ -3,14 +3,13 @@ name: Track Uvicorn Changes
 on:
   schedule:
     - cron: "0 0 * * *"
-  pull_request:
-    branches: [main]
 
 jobs:
   track:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - name: Retrieve issue description
+        run: |
           issueBody=$(gh api -X GET "/repos/Kludex/uvicorn-extensions/issues/19" --jq ".body")
 
           echo 'ISSUE_BODY='$issueBody >> $GITHUB_ENV
@@ -35,7 +34,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Create comment
+        if: ${{ env.COMMIT_PROTOCOLS_HASH != env.ISSUE_PROTOCOLS_HASH || env.COMMIT_TESTS_HASH != env.ISSUE_TESTS_HASH }}
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: 19
+          body: |
+            There are new changes in the Uvicorn repository:
+            - [uvicorn/protocols/http](https://github.com/encode/uvicorn/compare/${{ ISSUE_PROTOCOLS_HASH }}..${{ env.COMMIT_PROTOCOLS_HASH }})
+            - [tests/protocols/test_http.py](https://github.com/encode/uvicorn/compare/${{ ISSUE_TESTS_HASH }}..${{ env.COMMIT_TESTS_HASH }})
+
       - name: Update Issue Body
+        if: ${{ env.COMMIT_PROTOCOLS_HASH != env.ISSUE_PROTOCOLS_HASH || env.COMMIT_TESTS_HASH != env.ISSUE_TESTS_HASH }}
         run: |
           ISSUE_BODY=$(echo $ISSUE_BODY | sed "s/$ISSUE_PROTOCOLS_HASH/$COMMIT_PROTOCOLS_HASH/g")
           ISSUE_BODY=$(echo $ISSUE_BODY | sed "s/$ISSUE_TESTS_HASH/$COMMIT_TESTS_HASH/g")
