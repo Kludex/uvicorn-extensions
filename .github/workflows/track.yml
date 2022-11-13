@@ -12,21 +12,34 @@ jobs:
     steps:
       - run: |
           issueBody=$(gh api -X GET "/repos/Kludex/uvicorn-extensions/issues/19" --jq ".body")
+
           echo 'ISSUE_BODY='$issueBody >> $GITHUB_ENV
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions-ecosystem/action-regex-match@v2
-        id: regex-match
-        with:
-          text: "$ISSUE_BODY"
-          regex: "^- `(.+)(?=:): (.+)$"
+      - name: Retrieve Tracked Hashes
+        run: |
+          PROTOCOLS_HASH=$(echo $ISSUE_BODY | grep -oP "uvicorn\/protocols\/http\/\`: \K[[:alnum:]]+")
+          TESTS_HASH=$(echo $ISSUE_BODY | grep -oP "tests\/protocols\/test_http.py\`: \K[[:alnum:]]+")
 
-      - run: echo '${{ steps.regex-match.outputs.group1 }} -> ${{ steps.regex-match.outputs.group2 }} -> ${{ steps.regex-match.outputs.group3 }}'
+          echo 'ISSUE_PROTOCOLS_HASH='$PROTOCOLS_HASH >> $GITHUB_ENV
+          echo 'ISSUE_TESTS_HASH='$TESTS_HASH >> $GITHUB_ENV
 
-      # - run: |
-      #     commitHash=$(gh api -X GET "/repos/encode/uvicorn/commits?path=uvicorn/protocols/http" --jq ".[0].sha")
+      - name: Retrieve Latest Commit Hashes
+        run: |
+          protocolsCommitHash=$(gh api -X GET "/repos/encode/uvicorn/commits?path=uvicorn/protocols/http" --jq ".[0].sha")
+          testsCommitHash=$(gh api -X GET "/repos/encode/uvicorn/commits?path=tests/protocols/test_http.py" --jq ".[0].sha")
 
-      #     echo 'CURRENT_HASH='$commitHash >> $GITHUB_ENV
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo 'COMMIT_PROTOCOLS_HASH='$protocolsCommitHash >> $GITHUB_ENV
+          echo 'COMMIT_TESTS_HASH='$testsCommitHash >> $GITHUB_ENV
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Issue Body
+        run: |
+          ISSUE_BODY=$(echo $ISSUE_BODY | sed "s/$ISSUE_PROTOCOLS_HASH/$COMMIT_PROTOCOLS_HASH/g")
+          ISSUE_BODY=$(echo $ISSUE_BODY | sed "s/$ISSUE_TESTS_HASH/$COMMIT_TESTS_HASH/g")
+
+          gh api -X PATCH "/repos/Kludex/uvicorn-extensions/issues/19" -F "body=$ISSUE_BODY"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
