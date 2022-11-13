@@ -6,8 +6,7 @@ from typing import AsyncIterable, Awaitable, Callable, Iterable, Mapping, Tuple,
 import anyio
 from starlette.background import BackgroundTask
 from starlette.concurrency import iterate_in_threadpool
-from starlette.responses import ContentStream
-from starlette.responses import StreamingResponse as _StreamingResponse
+from starlette.responses import ContentStream, StreamingResponse as _StreamingResponse
 from starlette.types import Receive, Scope, Send
 
 Trailers = Tuple[str, str]

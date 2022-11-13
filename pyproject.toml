@@ -1,3 +1,15 @@
+[tool.mypy]
+disallow_untyped_defs = true
+ignore_missing_imports = true
+follow_imports = "silent"
+
+[tool.isort]
+profile = "black"
+combine_as_imports = true
+
+[tool.pytest]
+filterwarnings = ["error"]
+
 [tool.coverage.report]
 show_missing = true
 skip_covered = true

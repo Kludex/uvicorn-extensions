@@ -23,8 +23,6 @@ from uvicorn.protocols.http.httptools_impl import (
     HEADER_VALUE_RE,
     STATUS_LINE,
     HttpToolsProtocol,
-)
-from uvicorn.protocols.http.httptools_impl import (
     RequestResponseCycle as _RequestResponseCycle,
 )
 from uvicorn.protocols.utils import get_client_addr, get_path_with_query_string

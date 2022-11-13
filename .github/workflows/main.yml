@@ -15,15 +15,15 @@ jobs:
       - uses: actions/checkout@v3
       - uses: pantsbuild/actions/init-pants@v1
         with:
+          pants-python-version: ${{ matrix.python-version }}
           gha-cache-key: cache-py${{ matrix.python-version }}
           named-caches-hash: ${{ hashFiles('pants.lock') }}
           cache-lmdb-store: "true"
-          pants-ci-config: "pants.toml"
 
-      - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
+      # - name: Setup Python ${{ matrix.python-version }}
+      #   uses: actions/setup-python@v4
+      #   with:
+      #     python-version: ${{ matrix.python-version }}
 
       - name: Check BUILD files
         run: ./pants tailor --check update-build-files --check

@@ -1,7 +1,7 @@
 import asyncio
-import uvicorn_extended
 
 import pytest
+import uvicorn_extended
 import uvicorn_trailers
 
 from tests.constants import SIMPLE_GET_REQUEST
@@ -16,7 +16,10 @@ EXPECT_TRAILERS_HEAD_REQUEST = b"\r\n".join(
 )
 
 
-@pytest.fixture(scope="module", params=[uvicorn_trailers.HTTPProtocol, uvicorn_extended.HTTPProtocol])
+@pytest.fixture(
+    scope="module",
+    params=[uvicorn_trailers.HTTPProtocol, uvicorn_extended.HTTPProtocol],
+)
 def http_protocol(request) -> asyncio.Protocol:
     return request.param
 
