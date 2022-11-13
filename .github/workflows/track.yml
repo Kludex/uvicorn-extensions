@@ -1,0 +1,55 @@
+name: Track Uvicorn Changes
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve issue description
+        run: |
+          issueBody=$(gh api -X GET "/repos/Kludex/uvicorn-extensions/issues/19" --jq ".body")
+
+          echo 'ISSUE_BODY='$issueBody >> $GITHUB_ENV
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Retrieve Tracked Hashes
+        run: |
+          PROTOCOLS_HASH=$(echo $ISSUE_BODY | grep -oP "uvicorn\/protocols\/http\/\`: \K[[:alnum:]]+")
+          TESTS_HASH=$(echo $ISSUE_BODY | grep -oP "tests\/protocols\/test_http.py\`: \K[[:alnum:]]+")
+
+          echo 'ISSUE_PROTOCOLS_HASH='$PROTOCOLS_HASH >> $GITHUB_ENV
+          echo 'ISSUE_TESTS_HASH='$TESTS_HASH >> $GITHUB_ENV
+
+      - name: Retrieve Latest Commit Hashes
+        run: |
+          protocolsCommitHash=$(gh api -X GET "/repos/encode/uvicorn/commits?path=uvicorn/protocols/http" --jq ".[0].sha")
+          testsCommitHash=$(gh api -X GET "/repos/encode/uvicorn/commits?path=tests/protocols/test_http.py" --jq ".[0].sha")
+
+          echo 'COMMIT_PROTOCOLS_HASH='$protocolsCommitHash >> $GITHUB_ENV
+          echo 'COMMIT_TESTS_HASH='$testsCommitHash >> $GITHUB_ENV
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create comment
+        if: ${{ env.COMMIT_PROTOCOLS_HASH != env.ISSUE_PROTOCOLS_HASH || env.COMMIT_TESTS_HASH != env.ISSUE_TESTS_HASH }}
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: 19
+          body: |
+            There are new changes in the Uvicorn repository:
+            - [uvicorn/protocols/http](https://github.com/encode/uvicorn/compare/${{ ISSUE_PROTOCOLS_HASH }}..${{ env.COMMIT_PROTOCOLS_HASH }})
+            - [tests/protocols/test_http.py](https://github.com/encode/uvicorn/compare/${{ ISSUE_TESTS_HASH }}..${{ env.COMMIT_TESTS_HASH }})
+
+      - name: Update Issue Body
+        if: ${{ env.COMMIT_PROTOCOLS_HASH != env.ISSUE_PROTOCOLS_HASH || env.COMMIT_TESTS_HASH != env.ISSUE_TESTS_HASH }}
+        run: |
+          ISSUE_BODY=$(echo $ISSUE_BODY | sed "s/$ISSUE_PROTOCOLS_HASH/$COMMIT_PROTOCOLS_HASH/g")
+          ISSUE_BODY=$(echo $ISSUE_BODY | sed "s/$ISSUE_TESTS_HASH/$COMMIT_TESTS_HASH/g")
+
+          gh api -X PATCH "/repos/Kludex/uvicorn-extensions/issues/19" -F "body=$ISSUE_BODY"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
