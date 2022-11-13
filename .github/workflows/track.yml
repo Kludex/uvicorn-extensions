@@ -1,0 +1,32 @@
+name: Track Uvicorn Changes
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  pull_request:
+    branches: [main]
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          issueBody=$(gh api -X GET "/repos/Kludex/uvicorn-extensions/issues/19" --jq ".body")
+          echo 'ISSUE_BODY='$issueBody >> $GITHUB_ENV
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions-ecosystem/action-regex-match@v2
+        id: regex-match
+        with:
+          text: "$ISSUE_BODY"
+          regex: "^- `(.+)(?=:): (.+)$"
+
+      - run: echo '${{ steps.regex-match.outputs.group1 }} -> ${{ steps.regex-match.outputs.group2 }} -> ${{ steps.regex-match.outputs.group3 }}'
+
+      # - run: |
+      #     commitHash=$(gh api -X GET "/repos/encode/uvicorn/commits?path=uvicorn/protocols/http" --jq ".[0].sha")
+
+      #     echo 'CURRENT_HASH='$commitHash >> $GITHUB_ENV
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
