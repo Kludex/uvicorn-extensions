@@ -42,7 +42,7 @@ if __name__ == "__main__":
             logging.info(f"Found file {file.filename}")
             index = settings.input_files.index(file.filename)
             print(file.contents_url)
-            content = repo.get_contents(file.filename, ref=pr.head.sha)
+            content = repo.get_contents(file.filename, ref=pr.head.ref)
             print(content.sha, pr.head.ref)
             repo.update_file(
                 settings.input_files[index - 1],
