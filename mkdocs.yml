@@ -1,11 +1,24 @@
 site_name: Uvicorn Extensions
+site_description: Uvicorn experimental features 🚀
+site_url: https://kludex.github.io/uvicorn-extensions/
+site_author: Marcelo Trylesinski
+copyright: Copyright &copy; 2022 Marcelo Trylesinski
+
+repo_name: Kludex/uvicorn-extensions
+repo_url: https://github.com/Kludex/uvicorn-extensions
+edit_uri: edit/main/docs/
 
 theme:
   name: material
+  icon:
+    repo: fontawesome/brands/github
   palette:
     primary: deep purple
   features:
     - navigation.tabs
+
+plugins:
+  - search
 
 markdown_extensions:
   - attr_list
