@@ -12,6 +12,6 @@ Each feature is implemented as a **separate package**, and can be installed **in
 
 [Uvicorn]: https://www.uvicorn.org
 [HTTP Trailers extension]: https://asgi.readthedocs.io/en/latest/extensions.html#http-trailers
-[uvicorn-trailers]: https://pypi.org/project/uvicorn-trailers/
-[asgi-trailers]: https://pypi.org/project/asgi-trailers/
+[uvicorn-trailers]: packages/uvicorn-trailers.md
+[asgi-trailers]: packages/asgi-trailers.md
 [HTTP Trailers]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Trailer
