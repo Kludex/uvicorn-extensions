@@ -42,7 +42,7 @@ if __name__ == "__main__":
             index = settings.input_files.index(file.filename)
             print(file.contents_url)
             content = repo.get_contents(file.filename, ref=pr.head.sha)
-            print(content.decoded_content)
+            print(content.sha, pr.head.ref)
             repo.update_file(
                 settings.input_files[index - 1],
                 "Update",
