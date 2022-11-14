@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "uvicorn-httparse"
-version = "0.0.0"
-description = "Uvicorn HTTP implementation using httparse parser 🏃"
+version = "0.1.0"
+description = "Uvicorn HTTP implementation using httparse! 🏃"
 license = { text = "MIT" }
 authors = [{ name = "Marcelo Trylesinski", email = "marcelotryle@gmail.com" }]
 readme = "README.md"
