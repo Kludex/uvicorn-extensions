@@ -13,9 +13,10 @@ pip install uvicorn-trailers
 
 ```py
 import uvicorn
+import uvicorn_trailers
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", http="uvicorn_trailers.HTTPProtocol")
+    uvicorn.run("app:app", http=uvicorn_trailers.HTTPProtocol)
 ```
 
 ## License
