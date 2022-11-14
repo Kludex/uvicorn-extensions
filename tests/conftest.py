@@ -2,6 +2,7 @@ import asyncio
 
 import pytest
 import uvicorn_extended
+import uvicorn_httparse
 import uvicorn_trailers
 from uvicorn.config import LOGGING_CONFIG
 
@@ -11,7 +12,11 @@ LOGGING_CONFIG["loggers"]["uvicorn"]["propagate"] = True
 
 @pytest.fixture(
     scope="session",
-    params=[uvicorn_trailers.HTTPProtocol, uvicorn_extended.HTTPProtocol],
+    params=[
+        uvicorn_trailers.HTTPProtocol,
+        uvicorn_extended.HTTPProtocol,
+        uvicorn_httparse.HttparseProtocol,
+    ],
 )
 def http_protocol(request) -> asyncio.Protocol:
     return request.param

@@ -40,5 +40,6 @@ nav:
       - Welcome: index.md
       - Contributing: contributing.md
   - Packages:
+      - Uvicorn HTTParse: packages/uvicorn-httparse.md
       - Uvicorn Trailers: packages/uvicorn-trailers.md
       - ASGI Trailers: packages/asgi-trailers.md
