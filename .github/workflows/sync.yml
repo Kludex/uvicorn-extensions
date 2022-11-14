@@ -1,0 +1,19 @@
+name: Sync Files
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "docs/packages/**"
+      - "src/python/**"
+      - ".github/workflows/sync.yml"
+      - ".github/actions/sync/**"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/sync
+        with:
+          files: '["docs/packages/asgi-trailers.md", "src/python/asgi-trailers/README.md"]'
+          token: ${{ secrets.GITHUB_TOKEN }}

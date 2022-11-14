@@ -1,3 +1,4 @@
+<!-- There's a synchronization between `docs/package/asgi-trailers.md` and `src/python/asgi-trailers/README.md` -->
 # ASGI Trailers
 
 The `asgi-trailers` package implements a **[StreamingResponse]** that supports **[HTTP Trailers]**.

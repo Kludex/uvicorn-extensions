@@ -1,0 +1,16 @@
+name: Sync Files
+author: Marcelo Trylesinski <marcelotryle@gmail.com>
+description: Sync files from one location to another
+inputs:
+  files:
+    description: List of files to sync
+    required: true
+  token:
+    description: GitHub token
+    required: true
+runs:
+  using: docker
+  image: Dockerfile
+branding:
+  icon: align-center
+  color: purple
