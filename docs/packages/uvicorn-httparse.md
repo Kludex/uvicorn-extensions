@@ -15,9 +15,10 @@ pip install uvicorn-httparse
 
 ```py
 import uvicorn
+import uvicorn_httparse
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", http="uvicorn_httparse.HttparseProtocol")
+    uvicorn.run("app:app", http=uvicorn_httparse.HttparseProtocol)
 ```
 
 For more details, see the **[Uvicorn documentation]**.
