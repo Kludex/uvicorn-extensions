@@ -1,14 +1,10 @@
 import logging
 import sys
 from pathlib import Path
-from time import sleep
 from typing import List, Union
 
-import httpx
-from github import Github, GithubException
+from github import Github
 from pydantic import BaseModel, BaseSettings, SecretStr
-
-github_api = "https://api.github.com"
 
 
 class Settings(BaseSettings):
@@ -37,9 +33,6 @@ if __name__ == "__main__":
 
     files = [file for file in pr.get_files() if file.filename in settings.input_files]
 
-    if len(files) == 2:
-        logging.error("PR contains changes on both files, aborting")
-        sys.exit(1)
     if len(files) == 0:
         logging.error("PR does not contain changes on any file, skipping")
         sys.exit(0)

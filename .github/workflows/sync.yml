@@ -17,3 +17,8 @@ jobs:
         with:
           files: '["docs/packages/asgi-trailers.md", "src/python/asgi-trailers/README.md"]'
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ./.github/actions/sync
+        with:
+          files: '["docs/packages/uvicorn-trailers.md", "src/python/uvicorn-trailers/README.md"]'
+          token: ${{ secrets.GITHUB_TOKEN }}

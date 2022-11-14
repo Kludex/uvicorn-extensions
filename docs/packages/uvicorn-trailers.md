@@ -1,3 +1,4 @@
+<!-- There's a synchronization between `docs/package/uvicorn-trailers.md` and `src/python/uvicorn-trailers/README.md` -->
 # Uvicorn Trailers
 
 The `uvicorn-trailers` package adds support for [HTTP Trailers] to [Uvicorn].
