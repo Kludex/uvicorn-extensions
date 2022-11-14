@@ -41,14 +41,15 @@ if __name__ == "__main__":
         if file.filename in settings.input_files:
             logging.info(f"Found file {file.filename}")
             index = settings.input_files.index(file.filename)
+            old_filename = settings.input_files[index - 1]
             print(file.contents_url)
-            content = repo.get_contents(file.filename, ref=pr.head.ref)
-            print(content.sha, pr.head.ref)
+            new_content = repo.get_contents(file.filename, ref=pr.head.ref)
+            old_content = repo.get_contents(old_filename, ref=pr.head.ref)
             repo.update_file(
-                settings.input_files[index - 1],
+                old_filename,
                 "Update",
-                content.decoded_content,
-                content.sha,
+                new_content.decoded_content,
+                old_content.sha,
                 branch=pr.head.ref,
             )
         print(file.filename)
