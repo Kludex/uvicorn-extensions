@@ -43,3 +43,4 @@ nav:
       - Uvicorn HTTParse: packages/uvicorn-httparse.md
       - Uvicorn Trailers: packages/uvicorn-trailers.md
       - ASGI Trailers: packages/asgi-trailers.md
+      - Uvicorn Denial: packages/uvicorn-denial.md

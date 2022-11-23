@@ -27,3 +27,8 @@ jobs:
         with:
           files: '["docs/packages/uvicorn-httparse.md", "src/python/uvicorn-httparse/README.md"]'
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ./.github/actions/sync
+        with:
+          files: '["docs/packages/uvicorn-denial.md", "src/python/uvicorn-denial/README.md"]'
+          token: ${{ secrets.GITHUB_TOKEN }}
