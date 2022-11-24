@@ -47,3 +47,54 @@ jobs:
           name: pants-log
           path: .pants.d/pants.log
         if: always() # We want the log even on failures.
+
+  publish:
+    # needs: [tests]
+    # if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check package version
+        id: check
+        uses: ./.github/actions/release-check
+        # Outputs `tag`, and `package` path.
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Retrieve changes since last tag
+        id: changes
+        run: |
+          changelog=$(git log --pretty=format:"%h %s" --follow -- src/python/${{ steps.check.outputs.package }}/)
+
+          echo "changelog=${changelog}" >> $GITHUB_OUTPUT
+
+      - name: Add changelog entries
+        if: steps.changes.outputs.release == 'true'
+        run: |
+          echo "hi"
+
+      # - name: Create GitHub release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     draft: true
+      #     prerelease: true
+      #     body: |
+      #       ...
+      #     files: |
+      #       dist/*.whl
+      #       dist/*.tar.gz
+      #     tag_name: ${{ steps.check.outputs.tag }}
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # - uses: pantsbuild/actions/init-pants@v1
+      #   with:
+      #     pants-python-version: "3.10"
+      #     gha-cache-key: cache-py3.10
+      #     named-caches-hash: ${{ hashFiles('pants.lock') }}
+      #     cache-lmdb-store: "true"
+
+      # - name: Publish to PyPI
+      #   run: |
+      #     ./pants publish src/python/${{ steps.check.outputs.package }}

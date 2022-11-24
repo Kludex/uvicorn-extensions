@@ -1,0 +1,13 @@
+name: Release Check
+author: Marcelo Trylesinski <marcelotryle@gmail.com>
+description: Checks if the release is ready to be published
+inputs:
+  token:
+    description: GitHub token
+    required: true
+runs:
+  using: docker
+  image: Dockerfile
+branding:
+  icon: align-center
+  color: purple
