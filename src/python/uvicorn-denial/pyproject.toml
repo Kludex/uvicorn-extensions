@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "uvicorn-denial"
-version = "0.0.0"
+version = "0.0.1"
 description = "Websocket Denial Response extension for Uvicorn 🔒"
 license = { text = "MIT" }
 authors = [{ name = "Marcelo Trylesinski", email = "marcelotryle@gmail.com" }]
