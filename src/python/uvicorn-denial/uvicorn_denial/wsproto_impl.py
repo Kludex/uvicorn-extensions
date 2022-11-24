@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import sys
 import typing
 from urllib.parse import unquote
 
@@ -39,6 +40,11 @@ if typing.TYPE_CHECKING:  # pragma: no cover
         "WebSocketConnectEvent",
     ]
 
+if sys.version_info < (3, 8):  # pragma: no cover
+    from typing_extensions import Literal
+else:  # pragma: no cover
+    from typing import Literal
+
 
 class WSProtocol(asyncio.Protocol):
     def __init__(
@@ -65,7 +71,7 @@ class WSProtocol(asyncio.Protocol):
         self.transport: asyncio.Transport = None  # type: ignore[assignment]
         self.server: typing.Optional[typing.Tuple[str, int]] = None
         self.client: typing.Optional[typing.Tuple[str, int]] = None
-        self.scheme: str = None  # type: ignore[assignment]
+        self.scheme: Literal["ws", "wss"] = None  # type: ignore[assignment]
 
         # WebSocket state
         self.queue: asyncio.Queue["WebSocketEvent"] = asyncio.Queue()
