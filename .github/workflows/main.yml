@@ -4,13 +4,19 @@ on:
   push: { branches: [main] }
   pull_request: { branches: [main] }
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+
 jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     strategy:
+      # NOTE: Python 3.7 was dropped due to not be able to resolve dependencies.
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
     steps:
       - uses: actions/checkout@v3
       - uses: pantsbuild/actions/init-pants@v1
